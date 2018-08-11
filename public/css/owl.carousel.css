@@ -52,7 +52,7 @@
  *  Core Owl Carousel CSS File
  */
 .owl-carousel {
-  display: none;
+  display: block;
   width: 100%;
   -webkit-tap-highlight-color: transparent;
   /* position relative and z-index fix webkit rendering fonts issue */
@@ -99,7 +99,7 @@
   opacity: 0;
 }
 .owl-carousel .owl-refresh .owl-item {
-  display: none;
+  display: block;
 }
 .owl-carousel .owl-item {
   position: relative;

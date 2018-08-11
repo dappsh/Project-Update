@@ -1,48 +1,32 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
+import ReduxThunk from 'redux-thunk';
+import { Provider } from 'react-redux';
+import {createStore, applyMiddleware} from 'redux';
+import reducers from './reducers';
 import './App.css';
-import { Link, Route } from 'react-router-dom';
-import Home from './containers/Home/home';
-
+import MainRoutes from './Utils/MainRoutes';
 import Header from './components/Header/header'
-import About from './containers/about'
-import Karl from './containers/Home/karl'
-import Template from './containers/template'
-import Carousel from './components/Carousel/carousel';
-import ProductCarousel from './components/Carousel/productCarousel';
-import CheckOut from './components/CheckOut/checkOut';
-import ProductDetails from './components/ProductDetails/productDetails';
-
-import Login from './components/LoginSignUp/login'
-import SignUp from './components/LoginSignUp/signUp'
+import Footer from './components/Footer/footer'
 
 class App extends Component {
   render() {
+
+    const  store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
+    
     return (
-      <div className="App">
-        {/* <Test/> */}
-        {/* <About/> */}
-        {/* <Karl/> */}
-        {/* <Header/>  */}
-        {/* <Carousel/> */}
-        {/* <ProductCarousel/> */}
-        {/* <Template/> */}
-        {/* <Footer/> */}
-        {/* <SideNav/> */}
-        {/* <Home /> */}
-        {/* <Login /> */}
-        {/* <SignUp /> */}
-        {/* <CheckOut/> */}
-        {/* <ProductDetails/> */}
 
-
+      <Provider store={store}>
+      {/* membuat store yang menyimpan state, reducer */}
+      {/* seluruh component harus di bungkus provider*/}
         <div>
-          <Route exact path="/" component={Home} />
-          {/* <Route path="/article" component={Article} />
-          <Route path="/header" component={Header} />
-          <Route path="/footer" component={Footer} /> */}
+          <Header/>
+          <MainRoutes/>
+          {/* main routes berisi Route Path */}
+          <Footer/>
         </div>
-      </div>
+
+      </Provider>
     );
   }
 }

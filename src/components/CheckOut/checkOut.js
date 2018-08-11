@@ -4,8 +4,10 @@ import React, { Component } from 'react';
 
 class checkOut extends Component {
     render() {
-        return (
 
+
+
+        return (
 
 <div className="checkout_area section_padding_100">
     <div className="container">
@@ -19,21 +21,15 @@ class checkOut extends Component {
                         <p>Enter your cupone code</p>
                     </div>
 
-                    <form action="#" method="post">
+                    <form id="shipping">
                         <div className="row">
-                            <div className="col-md-6 mb-3">
-                                <label for="first_name">First Name <span>*</span></label>
-                                <input type="text" className="form-control" id="first_name" value="" required/>
+                            <div className="col-md-12 mb-3">
+                                <label for="first_name">Name <span>*</span></label>
+                                <input type="text" className="form-control" id="first_name" ref="receiver" required/>
                             </div>
-                            <div className="col-md-6 mb-3">
-                                <label for="last_name">Last Name <span>*</span></label>
-                                <input type="text" className="form-control" id="last_name" value="" required/>
-                            </div>
-                            <div className="col-12 mb-3">
-                                <label for="company">Company Name</label>
-                                <input type="text" className="form-control" id="company" value=""/>
-                            </div>
-                            <div className="col-12 mb-3">
+                    
+         
+                            {/* <div className="col-12 mb-3">
                                 <label for="country">Country <span>*</span></label>
                                 <select className="custom-select d-block w-100" id="country">
                                 <option value="usa">United States</option>
@@ -45,19 +41,19 @@ class checkOut extends Component {
                                 <option value="bra">Brazil</option>
                                 <option value="cana">Canada</option>
                             </select>
-                            </div>
+                            </div> */}
+
                             <div className="col-12 mb-3">
                                 <label for="street_address">Address <span>*</span></label>
-                                <input type="text" className="form-control mb-3" id="street_address" value=""/>
-                                <input type="text" className="form-control" id="street_address2" value=""/>
+                                <input type="text" className="form-control mb-3" id="street_address" ref='adress'/>
                             </div>
                             <div className="col-12 mb-3">
                                 <label for="postcode">Postcode <span>*</span></label>
-                                <input type="text" className="form-control" id="postcode" value=""/>
+                                <input type="number" className="form-control" id="postcode" ref='postcode' />
                             </div>
                             <div className="col-12 mb-3">
                                 <label for="city">Town/City <span>*</span></label>
-                                <input type="text" className="form-control" id="city" value=""/>
+                                <input type="text" className="form-control" id="city" ref='city'/>
                             </div>
                             <div className="col-12 mb-3">
                                 <label for="state">Province <span>*</span></label>
@@ -66,25 +62,6 @@ class checkOut extends Component {
                             <div className="col-12 mb-3">
                                 <label for="phone_number">Phone No <span>*</span></label>
                                 <input type="number" className="form-control" id="phone_number" min="0" value=""/>
-                            </div>
-                            <div className="col-12 mb-4">
-                                <label for="email_address">Email Address <span>*</span></label>
-                                <input type="email" className="form-control" id="email_address" value=""/>
-                            </div>
-
-                            <div className="col-12">
-                                <div className="custom-control custom-checkbox d-block mb-2">
-                                    <input type="checkbox" className="custom-control-input" id="customCheck1"/>
-                                    <label className="custom-control-label" for="customCheck1">Terms and conitions</label>
-                                </div>
-                                <div className="custom-control custom-checkbox d-block mb-2">
-                                    <input type="checkbox" className="custom-control-input" id="customCheck2"/>
-                                    <label className="custom-control-label" for="customCheck2">Create an accout</label>
-                                </div>
-                                <div className="custom-control custom-checkbox d-block">
-                                    <input type="checkbox" className="custom-control-input" id="customCheck3"/>
-                                    <label className="custom-control-label" for="customCheck3">Subscribe to our newsletter</label>
-                                </div>
                             </div>
                         </div>
                     </form>
@@ -160,7 +137,7 @@ class checkOut extends Component {
                         </div>
                     </div>
 
-                    <a href="#" className="btn karl-checkout-btn">Place Order</a>
+                    <a  className="btn karl-checkout-btn">Place Order</a>
                 </div>
             </div>
 

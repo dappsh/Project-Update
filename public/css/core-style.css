@@ -207,7 +207,7 @@ img {
 
 .bg-img {
     background-position: center center;
-    background-size: cover;
+    background-size: contain;
     background-repeat: no-repeat;
 }
 

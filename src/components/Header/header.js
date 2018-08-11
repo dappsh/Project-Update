@@ -1,119 +1,125 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import CartButton from '../CartButton/cartButton';
+import './header.css'
 
 
 
 class header extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            user: this.props.user,
+        }
+    }
+
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (nextProps.user !== prevState.user) {
+            return {
+                user: nextProps.user
+            }
+        }
+        return null;
+    }
+
     render() {
+        const { user } = this.state;
         return (
             <div>
-    
-            {/* <!-- ****** Header Area Start ****** --> */}
-            <header class="header_area">
-                {/* <!-- Top Header Area Start --> */}
-                <div class="top_header_area">
-                    <div class="container h-100">
-                        <div class="row h-100 align-items-center justify-content-end">
-    
-                            <div class="col-12 col-lg-7">
-                                <div class="top_single_area d-flex align-items-center">
-                                    {/* <!-- Logo Area --> */}
-                                    <div class="top_logo">
-                                    <a href="#"><img  src="img/product/logofull.png" alt=""/></a>
-                                        {/* <a href="#"><img  src="img/core-img/logo.png" alt=""/></a> */}
-                                    </div>
-                                    {/* <!-- Cart & Menu Area --> */}
-                                    <div class="header-cart-menu d-flex align-items-center ml-auto">
-                                        {/* <!-- Cart Area --> */}
-                                        <div class="cart">
-                                            <a href="#" id="header-cart-btn" target="_blank"><span class="cart_quantity">2</span> <i class="ti-bag"></i> Your Bag $20</a>
-                                            {/* <!-- Cart List Area Start --> */}
-                                            <ul class="cart-list">
-                                                <li>
-                                                    <a href="#" class="image"><img src="img/product-img/product-10.jpg" class="cart-thumb" alt=""/></a>
-                                                    <div class="cart-item-desc">
-                                                        <h6><a href="#">Women's Fashion</a></h6>
-                                                        <p>1x - <span class="price">$10</span></p>
-                                                    </div>
-                                                    <span class="dropdown-product-remove"><i class="icon-cross"></i></span>
-                                                </li>
-                                                <li>
-                                                    <a href="#" class="image"><img src="img/product-img/product-11.jpg" class="cart-thumb" alt=""/></a>
-                                                    <div class="cart-item-desc">
-                                                        <h6><a href="#">Women's Fashion</a></h6>
-                                                        <p>1x - <span class="price">$10</span></p>
-                                                    </div>
-                                                    <span class="dropdown-product-remove"><i class="icon-cross"></i></span>
-                                                </li>
-                                                <li class="total">
-                                                    <span class="pull-right">Total: $20.00</span>
-                                                    <a href="cart.html" class="btn btn-sm btn-cart">Cart</a>
-                                                    <a href="checkout-1.html" class="btn btn-sm btn-checkout">Checkout</a>
-                                                </li>
-                                            </ul>
+
+                {/* <!-- ****** Header Area Start ****** --> */}
+                <header className="header_area">
+                    {/* <!-- Top Header Area Start --> */}
+                    <div className="top_header_area">
+                        <div className="container h-100">
+                            <div className="row h-100 align-items-center justify-content-end">
+
+                                <div className="col-12 col-lg-7">
+                                    <div className="top_single_area d-flex align-items-center">
+                                        {/* <!-- Logo Area --> */}
+                                        <div className="top_logo">
+                                            <a  ><img src="img/product/logofull.png" alt="" /></a>
                                         </div>
-                                        <div class="header-right-side-menu ml-15">
-                                            {/* <a href="#" id="sideMenuBtn"><i class="ti-menu" aria-hidden="true"></i></a> */}
-                                        </div>
+
                                     </div>
                                 </div>
+
                             </div>
-    
                         </div>
                     </div>
-                </div>
-    
-                {/* <!-- Top Header Area End --> */}
-                <div class="main_header_area">
-                    <div class="container h-100">
-                        <div class="row h-100">
-                            <div class="col-12 d-md-flex justify-content-between">
-                                {/* <!-- Header Social Area --> */}
-                                <div class="header-social-area">
-                                    <a href="#"><span class="karl-level">Share</span> <i class="fa fa-pinterest" aria-hidden="true"></i></a>
-                                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                                    <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                    <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                                </div>
-                                {/* <!-- Menu Area --> */}
-                                <div class="main-menu-area">
-                                    <nav class="navbar navbar-expand-lg align-items-start">
-    
-                                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#karl-navbar" aria-controls="karl-navbar" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"><i class="ti-menu"></i></span></button>
-    
-                                        <div class="collapse navbar-collapse align-items-start collapse" id="karl-navbar">
-                                            <ul class="navbar-nav animated" id="nav">
-                                                <li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li>
-                                                <li class="nav-item dropdown">
-                                                    <a class="nav-link dropdown-toggle" href="#" id="karlDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
-                                                    <div class="dropdown-menu" aria-labelledby="karlDropdown">
-                                                        <a class="dropdown-item" href="index.html">Home</a>
-                                                        <a class="dropdown-item" href="shop.html">Shop</a>
-                                                        <a class="dropdown-item" href="product-details.html">Product Details</a>
-                                                        <a class="dropdown-item" href="cart.html">Cart</a>
-                                                        <a class="dropdown-item" href="checkout.html">Checkout</a>
-                                                    </div>
-                                                </li>
-                                                <li class="nav-item"><a class="nav-link" href="#">Dresses</a></li>
-                                                <li class="nav-item"><a class="nav-link" href="#"><span class="karl-level">hot</span> Shoes</a></li>
-                                                <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-                                            </ul>
-                                        </div>
-                                    </nav>
-                                </div>
-                                {/* <!-- Help Line --> */}
-                                <div class="help-line">
-                                    <a href="tel:+08121932373"><span class="ti-headphone-alt"></span> +62 81 1932 373</a>
+
+                    {/* <!-- Top Header Area End --> */}
+                    <div className="main_header_area">
+                        <div className="container h-100">
+                            <div className="row h-100">
+                                <div className="col-12 d-md-flex justify-content-between">
+                                    {/* <!-- Header Social Area --> */}
+                                    <div className="header-social-area">
+                                        <a><i className="fa fa-pinterest" aria-hidden="true"></i></a>
+                                        <a><i className="fa fa-facebook" aria-hidden="true"></i></a>
+                                        <a><i className="fa fa-twitter" aria-hidden="true"></i></a>
+                                        <a><i className="fa fa-linkedin" aria-hidden="true"></i></a>
+                                    </div>
+                                    {/* <!-- Menu Area --> */}
+
+                                    {/* <!-- Menu Area --> */}
+                                    <div className="main-menu-area">
+                                        <nav className="navbar navbar-expand-lg align-items-start">
+
+                                            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#karl-navbar" aria-controls="karl-navbar" aria-expanded="false" aria-label="Toggle navigation"><span className="navbar-toggler-icon"><i className="ti-menu"></i></span></button>
+
+                                            <div className="collapse navbar-collapse align-items-start collapse" id="karl-navbar">
+                                                <ul className="navbar-nav animated" id="nav">
+                                                    {/* <li className="nav-item active"><a className="nav-link" href="index.html">Home</a></li> */}
+                                                    <Link to='/'><li className="nav-item active"><p className="nav-link">Home</p></li></Link>
+                                                    <li className="nav-item"><p className="nav-link"  >Product</p></li>
+                                                    {/* <span className="karl-level">hot</span>  */}
+
+                                                </ul>
+                                            </div>
+                                        </nav>
+                                    </div>
+                                    {/* <div className="header-social-area">
+                                        <CartButton />
+                                    </div> */}
+
+                                    {/* INI CART */}
+
+
+                                    {/* {user ? */}
+                                    <div className="header-social-area">
+                                        <CartButton />
+
+                                        {/* <div>
+                                            <Link to='/userLogin'><button type="button" className="btn btn-outline-info">Log In</button></Link>
+                                            <Link to='/userRegister'><button type="button" className="btn btn-outline-info">Sign Up</button></Link>
+
+                                        </div> */}
+                                    </div>
+
+                                    {/* // : */}
+
+                                    {/* // <CartButton />  */}
+                                    {/* // } */}
+
+
+
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </header>
-</div>
-            
+                </header>
+            </div>
+
 
         )
     }
 }
 
-export default header
+const mapStateToProps = (state) => {
+    const user = state.user;
+    return { user }
+};
+
+export default connect(mapStateToProps, {})(header);
