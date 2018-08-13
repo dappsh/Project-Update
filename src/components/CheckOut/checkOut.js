@@ -3,6 +3,24 @@ import React, { Component } from 'react';
 
 
 class checkOut extends Component {
+
+    constructor(props){
+        super(props)
+            this.state = {
+                idCart:'',
+                shipto: '',
+                address:'',
+                phone:'',
+                
+        }
+        this.onChange = this.onChange.bind(this)
+    }
+
+    onChange(e){
+        this.setState({[e.target.name] : e.target.value})
+    }
+
+    
     render() {
 
 
@@ -17,51 +35,26 @@ class checkOut extends Component {
                 <div className="checkout_details_area mt-50 clearfix">
 
                     <div className="cart-page-heading">
-                        <h5>Billing Address</h5>
-                        <p>Enter your cupone code</p>
+                        <h5>Checkout</h5>
                     </div>
 
                     <form id="shipping">
                         <div className="row">
-                            <div className="col-md-12 mb-3">
-                                <label for="first_name">Name <span>*</span></label>
-                                <input type="text" className="form-control" id="first_name" ref="receiver" required/>
-                            </div>
-                    
-         
-                            {/* <div className="col-12 mb-3">
-                                <label for="country">Country <span>*</span></label>
-                                <select className="custom-select d-block w-100" id="country">
-                                <option value="usa">United States</option>
-                                <option value="uk">United Kingdom</option>
-                                <option value="ger">Germany</option>
-                                <option value="fra">France</option>
-                                <option value="ind">India</option>
-                                <option value="aus">Australia</option>
-                                <option value="bra">Brazil</option>
-                                <option value="cana">Canada</option>
-                            </select>
-                            </div> */}
-
+                          
                             <div className="col-12 mb-3">
-                                <label for="street_address">Address <span>*</span></label>
-                                <input type="text" className="form-control mb-3" id="street_address" ref='adress'/>
+                                <label >Name / Ship To <span>*</span></label>
+                                <input type="text"  name='shipto' className="form-control mb-3"   value={this.state.shipto}
+                                        onChange={this.onChange}/>
                             </div>
                             <div className="col-12 mb-3">
-                                <label for="postcode">Postcode <span>*</span></label>
-                                <input type="number" className="form-control" id="postcode" ref='postcode' />
+                                <label >Address <span>*</span></label>
+                                <input type="text"  name='address' className="form-control"   value={this.state.address}
+                                        onChange={this.onChange}/>
                             </div>
                             <div className="col-12 mb-3">
-                                <label for="city">Town/City <span>*</span></label>
-                                <input type="text" className="form-control" id="city" ref='city'/>
-                            </div>
-                            <div className="col-12 mb-3">
-                                <label for="state">Province <span>*</span></label>
-                                <input type="text" className="form-control" id="state" value=""/>
-                            </div>
-                            <div className="col-12 mb-3">
-                                <label for="phone_number">Phone No <span>*</span></label>
-                                <input type="number" className="form-control" id="phone_number" min="0" value=""/>
+                                <label >Phone <span>*</span></label>
+                                <input type="text"  name='phone' className="form-control"   value={this.state.phone}
+                                        onChange={this.onChange}/>
                             </div>
                         </div>
                     </form>
@@ -84,58 +77,6 @@ class checkOut extends Component {
                         <li><span>Total</span> <span>$59.90</span></li>
                     </ul>
 
-
-                    <div id="accordion" role="tablist" className="mb-4">
-                        <div className="card">
-                            <div className="card-header" role="tab" id="headingOne">
-                                <h6 className="mb-0">
-                                    <a data-toggle="collapse" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne"><i className="fa fa-circle-o mr-3"></i>Paypal</a>
-                                </h6>
-                            </div>
-
-                            <div id="collapseOne" className="collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
-                                <div className="card-body">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra tempor so dales. Phasellus sagittis auctor gravida. Integ er bibendum sodales arcu id te mpus. Ut consectetur lacus.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="card">
-                            <div className="card-header" role="tab" id="headingTwo">
-                                <h6 className="mb-0">
-                                    <a className="collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"><i className="fa fa-circle-o mr-3"></i>cash on delievery</a>
-                                </h6>
-                            </div>
-                            <div id="collapseTwo" className="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
-                                <div className="card-body">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo quis in veritatis officia inventore, tempore provident dignissimos.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="card">
-                            <div className="card-header" role="tab" id="headingThree">
-                                <h6 className="mb-0">
-                                    <a className="collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree"><i className="fa fa-circle-o mr-3"></i>credit card</a>
-                                </h6>
-                            </div>
-                            <div id="collapseThree" className="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
-                                <div className="card-body">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse quo sint repudiandae suscipit ab soluta delectus voluptate, vero vitae</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="card">
-                            <div className="card-header" role="tab" id="headingFour">
-                                <h6 className="mb-0">
-                                    <a className="collapsed" data-toggle="collapse" href="#collapseFour" aria-expanded="true" aria-controls="collapseFour"><i className="fa fa-circle-o mr-3"></i>direct bank transfer</a>
-                                </h6>
-                            </div>
-                            <div id="collapseFour" className="collapse show" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
-                                <div className="card-body">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est cum autem eveniet saepe fugit, impedit magni.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
                     <a  className="btn karl-checkout-btn">Place Order</a>
                 </div>

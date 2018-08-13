@@ -1,6 +1,5 @@
 // export namanya apa dan nama fungsi yang diberikan 
-
-export const userLogin = (x) => {
+const userLogin = (x) => {
     console.log('data dari login', x);
     return{
         type: 'user',
@@ -10,3 +9,29 @@ export const userLogin = (x) => {
         // payload adalah apa yang akan di return
     }
 } 
+
+const storeProduct = (x) => {
+    console.log('data Product Detail', x)
+    return{
+        type: 'productDetail',
+        // nama reducersnya
+        payload: x
+    }
+}
+
+
+const greeting = (x) => {
+    console.log('data Product Detail', x)
+    return{
+        type: 'greetRed',
+        // nama reducersnya
+        payload: x
+    }
+}
+
+
+export {
+    userLogin,
+    storeProduct,
+    greeting
+}

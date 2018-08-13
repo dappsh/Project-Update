@@ -5,6 +5,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 // login ID adalah nama function di index.js pada file action
 import { userLogin } from '../../action'
+import { greeting } from '../../action'
 //import nama functioan yang di buat di index.js pada reducers
 // import loginId di bawah (export default)
 class login extends Component {
@@ -25,28 +26,35 @@ class login extends Component {
     klikLogin(a) {
         var url = 'http://localhost:3210/login'
         axios.post(url, {
-            username: a.email.value,
+            username: a.username.value,
             password: a.password.value
         })
             .then((respon) => {
                 if (respon && respon.data && respon.data.length > 0) {
                     const data = respon.data[0];
-                    console.log('data bosqu', data);
+                    console.log('data respon.data : ', respon.data);
+                    console.log('data dari respon', data);
+                    console.log('data dari user id', data.userid);
                     this.props.userLogin(data);
                     this.props.history.push('/');
+                    var nama = data.fullname
+                    var welcome = `Halo ${nama}, happy shopping!`
+                    console.log(nama)
+                    this.props.greeting(welcome)
                 } else {
-                    alert('gagal masuk bossque');
+                    alert('gagal masuk');
                 }
             })
 
     }
 
     componentDidUpdate() {
-        console.log('propsdidUpdate', this.props)
+        console.log('propsd id Update', this.props)
     }
 
     render() {
         console.log('props login', this.props);
+
         return (
             <body id="LoginForm">
                 <div className="container">
@@ -62,7 +70,7 @@ class login extends Component {
                             <div className="form-group">
 
 
-                                <input type="email" className="form-control" ref="email" placeholder="Email Address" />
+                                <input type="email" className="form-control" ref="username" placeholder="Email Address" />
 
                             </div>
 
@@ -91,6 +99,6 @@ const mapStateToProps = (state) => {
     return { user }
 };
 
-export default connect(mapStateToProps, { userLogin })(login);
+export default connect(mapStateToProps, { userLogin, greeting })(login);
 
 // export default login;

@@ -6,6 +6,7 @@ import SignUp from '../components/SignUp/signUp';
 import Product from '../components/Product/product';
 import CheckOut from '../components/CheckOut/checkOut';
 import Cart from '../components/CartDetail/cartDetail';
+import ProdDetails from '../components/ProductDetails/prodDetails'
 
 
 // import About from './containers/about'
@@ -26,6 +27,7 @@ export default class MainRoutes extends Component {
                 <Route path='/product' component={Product}/>
                 <Route path='/checkOut' component={CheckOut}/>
                 <Route path='/cart' component={Cart}/>
+                <Route path='/productDetails' component={ProdDetails}/>
             </div>
         )
     }

@@ -1,23 +1,42 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { storeProduct } from '../../action';
+import { withRouter } from 'react-router';
+
 
 class product extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             product: [],
             dataModal: {},
             qty: 1,
+
         }
     }
 
-
-
     componentDidMount() {
+        { this.showAllProduct() }
+        // var a = this.props.userid.userid;
+        // console.log(a)
+
+    }
+
+    showAllProduct = () => {
         var url = `http://localhost:3210/product`;
+        axios.get(url).then((x) => {
+            this.setState({
+                product: x.data,
+            })
+            this.props.storeProduct(x.data);
+        })
+    }
+
+    showCatagoryCats = () => {
+        var url = `http://localhost:3210/product/category/cats`;
         axios.get(url).then((x) => {
             console.log(x.data);
             this.setState({
@@ -25,6 +44,26 @@ class product extends Component {
 
             })
         })
+    }
+
+    showCatagoryWords = () => {
+        var url = `http://localhost:3210/product/category/words`;
+        axios.get(url).then((x) => {
+            console.log(x.data);
+            this.setState({
+                product: x.data
+
+            })
+        })
+    }
+
+
+
+
+
+
+    // VIEW FULL PRODUCT, STORE DATA PRODUCT KE REDUX
+    storeProductToRedux = () => {
     }
 
     addQty = () => {
@@ -43,26 +82,57 @@ class product extends Component {
         }
     }
 
+    addToCart = () => {
+        var url = `http://localhost:3210/addToCart`;
+        axios.post(url, {
+            productname: this.refs.productname.value,
+            productqty: this.state.qty,
+            price: this.refs.price.value,
+            userid: this.props.user.userid,
+            status: "ok",
+            productid: this.refs.productid.value,
+            productimage: this.refs.productimage.value
+
+        })
+            .then((respon) => {
+                if (respon.data == 'sukses') {
+                    alert("add to cart");
+                    console.log('respon data addToCart', respon.data)
+                }
+                console.log('respon data addToCart', respon.data)
+                console.log('test user', this.props.user.userid)
+            })
+
+        // console.log('test user', this.props.user.userid)
+    }
 
     render() {
         const { dataModal, qty } = this.state;
+        console.log('data product redux', this.props.productDetail);
 
         return (
 
             <div>
 
                 {/* <!-- MATERI JUMBOTRON --> */}
-                <div className="jumbotron" style={{ height: '200px', backgroundColor: "#f5d568", color: "#ffffff", padding: "20px" }}>
+                <div className="jumbotron" style={{ height: '175px', backgroundColor: "#f5d568", color: "#ffffff", padding: "20px" }}>
                     <div className="container">
-                        <h1><span style={{ color: "#ffffff" }}>CATS COFFEE MUGS</span></h1>
-                        <p>Who doesn't love a cute cat pattern?</p>
-                        <div className="header-social-area">
-                            <div>
-                                <Link to='/userLogin'><button style={{backgroundColor: '#34ABBA'}} type="button" className="btn btn-info">Log In</button></Link>
-                                <Link to='/userRegister'><button style={{backgroundColor: '#34ABBA'}}  type="button" className="btn btn-info">Sign Up</button></Link>
-
+                        <h1><span style={{ color: "#ffffff" }}>{this.props.greet}</span></h1>
+                        <p>What Are You Looking For? </p>
+                        {/* <form className="navbar-form" role="search"> */}
+                            <div className="input-group w-25">
+                                <input type="text" className="form-control" placeholder="Search" name="q" />
+                                <div className="input-group-btn">
+                                    <button className="btn btn-outline-info" type="submit"><i className="fa fa-search"></i></button>
+                                </div>
                             </div>
-                        </div>
+                        {/* </form> */}
+                    </div>
+                </div>
+
+                <div className="karl-projects-menu">
+                    <div className="text-center portfolio-menu">
+                        <button className="btn active" data-filter="*"><h1>OUR PRODUCTS</h1></button>
                     </div>
                 </div>
 
@@ -90,7 +160,7 @@ class product extends Component {
 
                                                     <h5 className="price">Rp {dataModal.price}</h5>
                                                     <p>{dataModal.description}</p>
-                                                    <a  >View Full Product Details</a>
+                                                    {/* <button type="button" className="btn btn-outline-info" onClick={() => this.storeProductToRedux()}>View Full Product Details</button> */}
                                                 </div>
                                                 {/* <!-- Add to Cart Form --> */}
                                                 {/* <form className="cart" method="post"> */}
@@ -102,7 +172,15 @@ class product extends Component {
 
                                                     <button className="qty-plus" ><i className="fa fa-plus" aria-hidden="true" onClick={() => this.addQty()}></i></button>
 
-                                                    <button type="submit" name="addtocart" value="5" className="cart-submit">Add to cart</button>
+                                                    {/* AMBIL NILAI UNTUK CART */}
+                                                    <input type="hidden" ref="productid" value={dataModal.productid} />
+                                                    <input type="hidden" ref="productimage" value={dataModal.productimage} />
+                                                    <input type="hidden" ref="productname" value={dataModal.productname} />
+                                                    <input type="hidden" ref="price" value={dataModal.price} />
+                                                    <input type="hidden" value="" />
+
+
+                                                    <button type="submit" className="cart-submit" onClick={() => { this.addToCart() }}>Add to cart</button>
                                                     {/* onClick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;" */}
                                                 </div>
 
@@ -127,65 +205,28 @@ class product extends Component {
                             <div className="col-12 col-md-4 col-lg-3">
                                 <div className="shop_sidebar_area">
 
-                                    {/* <div className="widget catagory mb-50"> */}
-                                    {/* <!--  Side Nav  -->
-                                <div className="nav-side-menu">
-                                    <h6 className="mb-0">Catagories</h6>
-                                    <div className="menu-list">
-                                        <ul id="menu-content2" className="menu-content collapse out"> */}
-                                    {/* <!-- Single Item --> */}
-                                    {/* <li data-toggle="collapse" data-target="#women2">
-                                                <a  >Woman wear</a>
-                                                <ul className="sub-menu collapse show" id="women2">
-                                                    <li><a  >Midi Dresses</a></li>
-                                                    <li><a  >Maxi Dresses</a></li>
-                                                    <li><a  >Prom Dresses</a></li>
-                                                    <li><a  >Little Black Dresses</a></li>
-                                                    <li><a  >Mini Dresses</a></li>
+                                    <div className="widget catagory mb-50">
+                                        {/* <!--  Side Nav  --> */}
+                                        <div className="nav-side-menu">
+                                            <h6 className="mb-0">Catagories</h6>
+                                            <div className="menu-list">
+                                                <ul id="menu-content2" className="menu-content collapse out">
+                                                    {/* <!-- Single Item --> */}
+                                                    <li onClick={() => { this.showAllProduct() }} >
+                                                        <a>ALL MUGS</a>
+                                                    </li>
+                                                    <li onClick={() => this.showCatagoryCats()}>
+                                                        <a>CATS MUG</a>
+                                                    </li>
+                                                    <li onClick={() => { this.showCatagoryWords() }} >
+                                                        <a>WORDS MUG</a>
+                                                    </li>
+
                                                 </ul>
-                                            </li>
-                                          
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div> */}
-
-                                    <div className="widget recommended">
-                                        <h6 className="widget-title mb-30">Recommended</h6>
-
-                                        <div className="widget-desc">
-                                            {/* <!-- Single Recommended Product --> */}
-                                            <div className="single-recommended-product d-flex mb-30">
-                                                <div className="single-recommended-thumb mr-3">
-                                                    <img src="img/product-img/p1a.jpg" alt="" />
-                                                </div>
-                                                <div className="single-recommended-desc">
-                                                    <h6>Men’s T-shirt</h6>
-                                                    <p>Rp  39.99</p>
-                                                </div>
-                                            </div>
-                                            {/* <!-- Single Recommended Product --> */}
-                                            <div className="single-recommended-product d-flex mb-30">
-                                                <div className="single-recommended-thumb mr-3">
-                                                    <img src="img/product-img/p2a.jpg" alt="" />
-                                                </div>
-                                                <div className="single-recommended-desc">
-                                                    <h6>Blue mini top</h6>
-                                                    <p>Rp  19.99</p>
-                                                </div>
-                                            </div>
-                                            {/* <!-- Single Recommended Product --> */}
-                                            <div className="single-recommended-product d-flex">
-                                                <div className="single-recommended-thumb mr-3">
-                                                    <img src="img/product-img/p3a.jpg" alt="" />
-                                                </div>
-                                                <div className="single-recommended-desc">
-                                                    <h6>Women’s T-shirt</h6>
-                                                    <p>Rp  39.99</p>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
 
@@ -243,4 +284,12 @@ class product extends Component {
     }
 }
 
-export default product
+
+const mapStateToProps = (state) => {
+    const productDetail = state.productDetail;
+    const user = state.user
+    const greet = state.greetRed
+    return { productDetail, user, greet }
+};
+
+export default withRouter(connect(mapStateToProps, { storeProduct })(product));

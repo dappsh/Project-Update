@@ -13,6 +13,7 @@ class register extends Component {
             username : '',
             email: '',
             password:'',
+            fullname:''
             // phone :'',
             // errors:{
             // }
@@ -34,6 +35,7 @@ class register extends Component {
     KlikSignUp(){
         // posting user baru
         const newUser = {
+            fullname:this.state.fullname,
             username : this.state.username,
             email : this.state.email,
             password : this.state.password,
@@ -63,12 +65,24 @@ class register extends Component {
                                     {/* <p>Please enter your email and password</p> */}
                                 </div>
                                 <form id='signUp'>
+                                 {/* name user */}
+                                 <div className='form-group'>
+                                        <input 
+                                        type='text' 
+                                        className='form-control' 
+                                        placeholder='Full Name'
+                                        name='fullname'
+                                        value={this.state.fullname}
+                                        onChange={this.onChange}
+                                        />
+                                    </div>
+
                                 {/* name user */}
                                     <div className='form-group'>
                                         <input 
                                         type='text' 
                                         className='form-control' 
-                                        placeholder='Full Name'
+                                        placeholder='Username'
                                         name='username'
                                         value={this.state.username}
                                         onChange={this.onChange}

@@ -56,10 +56,7 @@ class header extends Component {
                                 <div className="col-12 d-md-flex justify-content-between">
                                     {/* <!-- Header Social Area --> */}
                                     <div className="header-social-area">
-                                        <a><i className="fa fa-pinterest" aria-hidden="true"></i></a>
-                                        <a><i className="fa fa-facebook" aria-hidden="true"></i></a>
-                                        <a><i className="fa fa-twitter" aria-hidden="true"></i></a>
-                                        <a><i className="fa fa-linkedin" aria-hidden="true"></i></a>
+                            
                                     </div>
                                     {/* <!-- Menu Area --> */}
 
@@ -73,7 +70,7 @@ class header extends Component {
                                                 <ul className="navbar-nav animated" id="nav">
                                                     {/* <li className="nav-item active"><a className="nav-link" href="index.html">Home</a></li> */}
                                                     <Link to='/'><li className="nav-item active"><p className="nav-link">Home</p></li></Link>
-                                                    <li className="nav-item"><p className="nav-link"  >Product</p></li>
+
                                                     {/* <span className="karl-level">hot</span>  */}
 
                                                 </ul>
@@ -87,21 +84,23 @@ class header extends Component {
                                     {/* INI CART */}
 
 
-                                    {/* {user ? */}
-                                    <div className="header-social-area">
-                                        <CartButton />
+                                    {user ?
+                                        // <div className="header-social-area">
+                                        //     <CartButton />
 
-                                        {/* <div>
-                                            <Link to='/userLogin'><button type="button" className="btn btn-outline-info">Log In</button></Link>
-                                            <Link to='/userRegister'><button type="button" className="btn btn-outline-info">Sign Up</button></Link>
+                                            <div>
+                                                <Link to='/cart'><button style={{marginRight:10}} type="button" className="btn btn-danger"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart</button></Link>
+                                                <Link to='/checkOut'><button type="button" className="btn btn-info">Check Out</button></Link>
 
-                                        </div> */}
-                                    </div>
+                                            </div>
+                                        
 
-                                    {/* // : */}
-
-                                    {/* // <CartButton />  */}
-                                    {/* // } */}
+                                        :
+                                        <div>
+                                        <Link to='/userLogin'><button style={{marginRight:10}} type="button" className="btn btn-outline-info">Log In</button></Link>
+                                        <Link to='/userRegister'><button  type="button" className="btn btn-outline-info">Sign Up</button></Link>
+                                        </div>
+                                    }
 
 
 
